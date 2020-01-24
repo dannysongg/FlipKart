@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="libs/mdb/mdb.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/main.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand waves-effect" href="/storefront">
+        <strong class="blue-text">FlipKartt</strong>
+    </a>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link waves-effect" href="/storefront">Home</a>
+        </li>
+        </ul>
+
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+        <li class="nav-item">
+            <a class="nav-link waves-effect" href="/cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+            </a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" href="#"><%=user.Name%></a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/logOut">Log Out</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/myaccount">Edit My Account</a>
+              <a class="dropdown-item" href="/myshipping">Edit Shipping Info</a>
+              <a class="dropdown-item" href="/mypayment">Edit Payment Info</a>
+            </div>
+        </li>
+        </ul>
+
+    </div>
+
+    </div>
+</nav>
+    <main>
+
+        <!-- Main Container -->
+        <div class="container">
+    
+          <section class="section my-5 pb-5">
+    
+            <!-- Shopping Cart table -->
+            <div class="table-responsive">
+    
+              <table class="table product-table">
+    
+                <!-- Table head -->
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th class="font-weight-bold">
+                      <strong>Product</strong>
+                    </th>
+                    <th class="font-weight-bold">
+                      <strong>Price</strong>
+                    </th>
+                    <th class="font-weight-bold">
+                      <strong>QTY</strong>
+                    </th>
+                    <th class="font-weight-bold">
+                      <strong>Amount</strong>
+                    </th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <!-- /.Table head -->
+    
+                <!-- Table body -->
+                <tbody>
+                    <% var total = 0 %>
+                    <% products.forEach((product, index) => { %>
+                    <tr>
+                        <th scope="row">
+                        <img src="../images/<%=product.Image%>" alt="" class="img-fluid z-depth-0">
+                        </th>
+                        <td>
+                        <h5 class="mt-3">
+                            <strong><%=product.Name%></strong>
+                        </h5>
+                        </td>
+                        <%total = total + product.Price * product.quantity%>
+                        <td>$<%=product.Price%></td>
+                        <td class="text-center text-md-left">
+                        <span class="qty"><%=product.quantity%> </span>
+                        <!-- <div class="btn-group radio-group ml-2" data-toggle="buttons">
+                            <label class="btn btn-sm btn-primary btn-rounded">
+                            <input type="radio" name="options" id="option1">&mdash;
+                            </label>
+                            <label class="btn btn-sm btn-primary btn-rounded">
+                            <input type="radio" name="options" id="option2">+
+                            </label>
+                        </div> -->
+                        </td>
+                        <td class="font-weight-bold">
+                        <strong>$<%=product.Price * product.quantity%></strong>
+                        </td>
+                        <td>
+                        <form action = "" method = "POST">
+                                <button type="submit" name="productID" value="<%=product.productID%>" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Remove item">X
+                                </button>
+                        </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+    
+                  <!-- Fourth row -->
+                  <tr>
+                    <td colspan="3"></td>
+                    <td>
+                      <h4 class="mt-2">
+                        <strong>Total</strong>
+                      </h4>
+                    </td>
+                    <td class="text-right">
+                      <h4 class="mt-2">
+                        <strong>$<%=total%></strong>
+                      </h4>
+                    </td>
+                    <td colspan="3" class="text-right">
+                      <button type="button" class="btn btn-primary btn-rounded"><a href="/checkout">Continue to Checkout
+                        <i class="fas fa-angle-right right"></i></a>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+    </main>
+    <script src="libs/jquery/jquery-3.2.1.min.js"></script>
+    <script src="libs/bootstrap/js/popper.js"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/mdb/mdb.min.js"></script>
+    
+    </body>
+</html>
